@@ -18,6 +18,12 @@ const ItemController = (function(){
         currentItem: null, 
         calories: 0
     }
+    // public return value
+    return {
+        logState: function(){
+            return state
+        }
+    } 
 })()
 
 // UI Controller - IIFE
