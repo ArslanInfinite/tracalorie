@@ -37,6 +37,9 @@ const ItemController = (function(){
 
 // UI Controller - IIFE
 const UIController = (function(){
+    const UISelectors = {
+        itemList: '#item-list'
+    }
     return {
         populateItemList: function(items){
             // creating html and setting it to an empty string 
@@ -54,7 +57,7 @@ const UIController = (function(){
             });
 
             // inserting list items 
-            document.querySelector('#item-list').innerHTML = html
+            document.querySelector(UISelectors.itemList).innerHTML = html
         }
     }
 })()
