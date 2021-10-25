@@ -89,7 +89,10 @@ const AppController = (function(ItemController, UIController){
     const itemAddSubmit = function(event){
         // getting form input from UIController
         const input = UIController.getItemInput()
-        console.log(input)
+        // check for valid name and calorie inputs
+        if(input.name !== '' && input.calories !== ''){
+            console.log(123)
+        }
         event.preventDefault()
     }
 
