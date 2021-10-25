@@ -55,18 +55,24 @@ const UIController = (function(){
                 </li>
                 `
             });
-
             // inserting list items 
             document.querySelector(UISelectors.itemList).innerHTML = html
+        }, 
+        // creating a public method to retrieve UISelectors to use with AppController's loadEventListeners function
+        getSelectors: function(){
+            return UISelectors
         }
     }
 })()
 
-
-
 // App Controller (main controller) - IIFE
 // 
 const AppController = (function(ItemController, UIController){
+    // loading eventlisteners 
+    const loadEventListeners = function(){
+        const UISelectors = UIController.getSelectors()
+    }
+
     // anything that needs to be run immediately will be in the initializer 
     // ie edit state must be clear, calories are 0, etc
     return {
