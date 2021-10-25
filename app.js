@@ -26,6 +26,9 @@ const ItemController = (function(){
         getItems: function(){
             return state.items
         },
+        addItem: function(name, calories){
+            
+        }, 
         // returning state 
         logState: function(){
             return state
@@ -91,7 +94,8 @@ const AppController = (function(ItemController, UIController){
         const input = UIController.getItemInput()
         // check for valid name and calorie inputs
         if(input.name !== '' && input.calories !== ''){
-            console.log(123)
+            // adding item
+            const newItem = ItemController.addItem(input.name, input.calories)
         }
         event.preventDefault()
     }
