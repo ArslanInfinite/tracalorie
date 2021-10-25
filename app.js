@@ -39,7 +39,9 @@ const ItemController = (function(){
 const UIController = (function(){
     const UISelectors = {
         itemList: '#item-list', 
-        addButton: '.add-btn'
+        addButton: '.add-btn', 
+        itemNameInput: '#item-name', 
+        itemCaloriesInput: '#item-calories'
     }
     return {
         populateItemList: function(items){
@@ -59,6 +61,12 @@ const UIController = (function(){
             // inserting list items 
             document.querySelector(UISelectors.itemList).innerHTML = html
         }, 
+        getItemInput: function(){
+            return {
+                name: document.querySelector(UISelectors.itemNameInput).value, 
+                calories: document.querySelector(UISelectors.itemCaloriesInput).value
+            }
+        },
         // creating a public method to retrieve UISelectors to use with AppController's loadEventListeners function
         getSelectors: function(){
             return UISelectors
@@ -79,7 +87,9 @@ const AppController = (function(ItemController, UIController){
 
     // adding items function
     const itemAddSubmit = function(event){
-        console.log('add')
+        // getting form input from UIController
+        const input = UIController.getItemInput()
+        console.log(input)
         event.preventDefault()
     }
 
