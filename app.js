@@ -1,5 +1,7 @@
 // Storage Controller
 
+
+
 // Item Controller - IIFE
 const ItemController = (function(){
     // creating Item constructor to create items 
@@ -26,13 +28,26 @@ const ItemController = (function(){
     } 
 })()
 
+
+
 // UI Controller - IIFE
 const UIController = (function(){
 
 })()
 
+
+
 // App Controller (main controller) - IIFE
 // 
 const AppController = (function(ItemController, UIController){
+    // anything that needs to be run immediately will be in the initializer 
+    // ie edit state must be clear, calories are 0, etc
+    return {
+        init: function(){
+            console.log('hello')
+        }
+    }
 
 })(ItemController, UIController)
+
+AppController.init()
