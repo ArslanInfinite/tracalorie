@@ -20,8 +20,13 @@ const ItemController = (function(){
         currentItem: null, 
         calories: 0
     }
-    // public return value
+    // public return values
     return {
+        // returning items 
+        getItems: function(){
+            return state.items
+        },
+        // returning state 
         logState: function(){
             return state
         }
@@ -32,7 +37,26 @@ const ItemController = (function(){
 
 // UI Controller - IIFE
 const UIController = (function(){
+    return {
+        populateItemList: function(items){
+            // creating html and setting it to an empty string 
+            let html = ''
+            // looping through every item and adding it as a list item to html
+            items.forEach(function(item){
+                html += `
+                <li class="collection-item" id="item-${item.id}">
+                    <strong>${item.name}: </strong> <em>${item.calories} calories</em>
+                    <a href="#" class="secondary-content">
+                        <i class="edit-item fa fa-pencil"></i>
+                    </a>
+                </li>
+                `
+            });
 
+            // inserting list items 
+            document.querySelector('#item-list').innerHTML = html
+        }
+    }
 })()
 
 
@@ -43,11 +67,14 @@ const AppController = (function(ItemController, UIController){
     // anything that needs to be run immediately will be in the initializer 
     // ie edit state must be clear, calories are 0, etc
     return {
-        init: function(){
-            console.log('hello')
+        initialize: function(){
+        // creating function to grab all the items from ItemController upon starting app
+        const items = ItemController.getItems()
+        // populate list with those grabbed items
+        UIController.populateItemList(items)
         }
     }
 
 })(ItemController, UIController)
 
-AppController.init()
+AppController.initialize()
