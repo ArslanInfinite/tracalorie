@@ -38,7 +38,8 @@ const ItemController = (function(){
 // UI Controller - IIFE
 const UIController = (function(){
     const UISelectors = {
-        itemList: '#item-list'
+        itemList: '#item-list', 
+        addButton: '.add-btn'
     }
     return {
         populateItemList: function(items){
@@ -70,7 +71,16 @@ const UIController = (function(){
 const AppController = (function(ItemController, UIController){
     // loading eventlisteners 
     const loadEventListeners = function(){
+        // getting UI selectors
         const UISelectors = UIController.getSelectors()
+        // adding a new item event
+        document.querySelector(UISelectors.addButton).addEventListener('click', itemAddSubmit)
+    }
+
+    // adding items function
+    const itemAddSubmit = function(event){
+        console.log('add')
+        event.preventDefault()
     }
 
     // anything that needs to be run immediately will be in the initializer 
@@ -81,6 +91,8 @@ const AppController = (function(ItemController, UIController){
         const items = ItemController.getItems()
         // populate list with those grabbed items
         UIController.populateItemList(items)
+        // loading all event listeners 
+        loadEventListeners()
         }
     }
 
