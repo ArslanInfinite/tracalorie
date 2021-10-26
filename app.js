@@ -35,6 +35,13 @@ const ItemController = (function(){
             } else {
                 ID = 0
             } 
+            // converting the calorie input from string to number
+            calories = parseInt(calories)
+            // creating new item
+            newItem = new Item(ID, name, calories)
+            // adding that new item into the array of items 
+            state.items.push(newItem)
+            return newItem
         }, 
         // returning state 
         logState: function(){
@@ -77,6 +84,18 @@ const UIController = (function(){
                 calories: document.querySelector(UISelectors.itemCaloriesInput).value
             }
         },
+        addListItem: function(item){
+            // creating LI element to place new item in, assigning attributes to it
+            const li = document.createElement('li')
+            li.className = 'collection-item'
+            li.id = `item-${item.id}`
+            li.innerHTML = `<strong>${item.name}: </strong> <em>${item.calories} calories</em>
+            <a href="#" class="secondary-content">
+                <i class="edit-item fa fa-pencil"></i>
+            </a>`
+            // inserting item
+            document.querySelector(UISelectors.itemList).insertAdjacentElement('beforeend', li)
+        },
         // creating a public method to retrieve UISelectors to use with AppController's loadEventListeners function
         getSelectors: function(){
             return UISelectors
@@ -103,6 +122,8 @@ const AppController = (function(ItemController, UIController){
         if(input.name !== '' && input.calories !== ''){
             // adding item
             const newItem = ItemController.addItem(input.name, input.calories)
+            // adding new item to the UI
+            UIController.addListItem(newItem)
         }
         event.preventDefault()
     }
