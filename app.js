@@ -138,7 +138,8 @@ const UIController = (function(){
         },
         addItemToForm: function(){
             document.querySelector(UISelectors.itemNameInput).value = ItemController.getCurrentItem().name, 
-            document.querySelector(UISelectors.itemCaloriesInput).value = ItemController.getCurrentItem().calories
+            document.querySelector(UISelectors.itemCaloriesInput).value = ItemController.getCurrentItem().calories, 
+            UIController.showEditState()
         },
         hideList: function(){
             document.querySelector(UISelectors.itemList).style.display = 'none'
@@ -152,6 +153,12 @@ const UIController = (function(){
             document.querySelector(UISelectors.deleteButton).style.display = 'none'
             document.querySelector(UISelectors.backButton).style.display = 'none'
             document.querySelector(UISelectors.addButton).style.display = 'inline'
+        },
+        showEditState: function(){
+            document.querySelector(UISelectors.updateButton).style.display = 'inline'
+            document.querySelector(UISelectors.deleteButton).style.display = 'inline'
+            document.querySelector(UISelectors.backButton).style.display = 'inline'
+            document.querySelector(UISelectors.addButton).style.display = 'none'
         },
         getSelectors: function(){
             return UISelectors
