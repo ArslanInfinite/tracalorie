@@ -171,6 +171,10 @@ const AppController = (function(ItemController, UIController){
         } else {
             UIController.populateItemList(items)
         }
+        const totalCalories = ItemController.getTotalCalories()
+            // show total calories on UI
+            UIController.showTotalCalories(totalCalories)
+            
         // loading all event listeners 
         loadEventListeners()
         }
