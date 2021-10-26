@@ -147,6 +147,8 @@ const AppController = (function(ItemController, UIController){
         const UISelectors = UIController.getSelectors()
         // adding a new item event
         document.querySelector(UISelectors.addButton).addEventListener('click', itemAddSubmit)
+        // edit icon click event
+        document.querySelector(UISelectors.itemList).addEventListener('click', itemUpdateSubmit)
     }
 
     // adding items function
@@ -168,6 +170,17 @@ const AppController = (function(ItemController, UIController){
         }
         event.preventDefault()
     }
+
+    // updating item submit
+    const itemUpdateSubmit = function(event){
+        if(event.target.classList.contains('edit-item')){
+            // get the list item ID (item-0) (item-1)
+            // because the edit button does not appear initially on the page, event delegation is used to select the right parent element and its id for interaction
+            const listID = event.target.parentNode.parentNode.id
+        }
+        event.preventDefault()
+    }
+
 
     // anything that needs to be run immediately will be in the initializer 
     // ie edit state must be clear, calories are 0, etc
