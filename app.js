@@ -43,6 +43,20 @@ const ItemController = (function(){
             // adding that new item into the array of items 
             state.items.push(newItem)
             return newItem
+        },
+        getItemByID: function(id){
+            let found = null
+            // looping through all items
+            state.items.forEach(function(item){
+                // matching ID
+                if(item.id === id){
+                    found = item
+                }
+            })
+            return found
+        },
+        setCurrentItem: function(item){
+            state.currentItem = item
         }, 
         getTotalCalories: function(){
             // loop through all items and add all calories together
@@ -182,7 +196,9 @@ const AppController = (function(ItemController, UIController){
             // getting the actual ID of that item
             const ID = parseInt(listIDArray[1])
             // getting the item based off its ID number
-            const itemToEdit = ItemController.getItemByID(id)
+            const itemToEdit = ItemController.getItemByID(ID)
+            // setting the current item
+            ItemController.setCurrentItem(itemToEdit)
          }
         event.preventDefault()
     }
