@@ -155,6 +155,7 @@ const UIController = (function(){
             document.querySelector(UISelectors.addButton).style.display = 'inline'
         },
         showEditState: function(){
+            UIController.clearInput()
             document.querySelector(UISelectors.updateButton).style.display = 'inline'
             document.querySelector(UISelectors.deleteButton).style.display = 'inline'
             document.querySelector(UISelectors.backButton).style.display = 'inline'
@@ -176,7 +177,7 @@ const AppController = (function(ItemController, UIController){
         // adding a new item event
         document.querySelector(UISelectors.addButton).addEventListener('click', itemAddSubmit)
         // edit icon click event
-        document.querySelector(UISelectors.itemList).addEventListener('click', itemUpdateSubmit)
+        document.querySelector(UISelectors.itemList).addEventListener('click', itemEditClick)
     }
 
     // adding items function
@@ -200,7 +201,7 @@ const AppController = (function(ItemController, UIController){
     }
 
     // updating item submit
-    const itemUpdateSubmit = function(event){
+    const itemEditClick = function(event){
         if(event.target.classList.contains('edit-item')){
             // get the list item ID (item-0) (item-1)
             // because the edit button does not appear initially on the page, event delegation is used to select the right parent element and its id for interaction
