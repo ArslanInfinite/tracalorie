@@ -69,6 +69,9 @@ const UIController = (function(){
     const UISelectors = {
         itemList: '#item-list', 
         addButton: '.add-btn', 
+        updateButton: '.update-btn', 
+        deleteButton: '.delete-btn', 
+        backButton: '.back-btn', 
         itemNameInput: '#item-name', 
         itemCaloriesInput: '#item-calories', 
         totalCalories: '.total-calories'
@@ -121,6 +124,13 @@ const UIController = (function(){
         },
         showTotalCalories: function(totalCalories){
             document.querySelector(UISelectors.totalCalories).textContent = totalCalories
+        },
+        clearEditState: function(){
+            UIController.clearInput()
+            document.querySelector(UISelectors.updateButton).style.display = 'none'
+            document.querySelector(UISelectors.deleteButton).style.display = 'none'
+            document.querySelector(UISelectors.backButton).style.display = 'none'
+            document.querySelector(UISelectors.addButton).style.display = 'inline'
         },
         getSelectors: function(){
             return UISelectors
