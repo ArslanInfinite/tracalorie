@@ -177,7 +177,13 @@ const AppController = (function(ItemController, UIController){
             // get the list item ID (item-0) (item-1)
             // because the edit button does not appear initially on the page, event delegation is used to select the right parent element and its id for interaction
             const listID = event.target.parentNode.parentNode.id
-        }
+            // breaking the items into an array
+            const listIDArray = listID.split('-')
+            // getting the actual ID of that item
+            const ID = parseInt(listIDArray[1])
+            // getting the item based off its ID number
+            const itemToEdit = ItemController.getItemByID(id)
+         }
         event.preventDefault()
     }
 
