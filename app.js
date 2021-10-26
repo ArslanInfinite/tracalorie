@@ -13,9 +13,10 @@ const ItemController = (function(){
     // creating data structure / initial state (mimic react state)
     const state = {
         items: [
-            {id: 0, name: 'Steak Dinner', calories: 1200}, 
-            {id: 1, name: 'Ice cream sandwich', calories: 400}, 
-            {id: 2, name: 'Fried eggs', calories: 300}
+
+            // {id: 0, name: 'Steak Dinner', calories: 1200}, 
+            // {id: 1, name: 'Ice cream sandwich', calories: 400}, 
+            // {id: 2, name: 'Fried eggs', calories: 300}
         ], 
         currentItem: null, 
         calories: 0
@@ -85,6 +86,8 @@ const UIController = (function(){
             }
         },
         addListItem: function(item){
+            // showing the list 
+            document.querySelector(UISelectors.itemList).style.display = 'block'
             // creating LI element to place new item in, assigning attributes to it
             const li = document.createElement('li')
             li.className = 'collection-item'
@@ -100,6 +103,9 @@ const UIController = (function(){
         clearInput: function(){
             document.querySelector(UISelectors.itemNameInput).value = '', 
             document.querySelector(UISelectors.itemCaloriesInput).value = ''
+        },
+        hideList: function(){
+            document.querySelector(UISelectors.itemList).style.display = 'none'
         },
         getSelectors: function(){
             return UISelectors
@@ -141,7 +147,11 @@ const AppController = (function(ItemController, UIController){
         // creating function to grab all the items from ItemController upon starting app
         const items = ItemController.getItems()
         // populate list with those grabbed items
-        UIController.populateItemList(items)
+        if(items.length === 0){
+            UIController.hideList()
+        } else {
+            UIController.populateItemList(items)
+        }
         // loading all event listeners 
         loadEventListeners()
         }
