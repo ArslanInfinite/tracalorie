@@ -27,7 +27,14 @@ const ItemController = (function(){
             return state.items
         },
         addItem: function(name, calories){
-            
+            let ID
+            //creaing ID for each new item
+            if(state.items.length > 0){
+                // automatically incrementing new IDs based on the length of the array of items
+                ID = state.items[state.items.length - 1].id + 1
+            } else {
+                ID = 0
+            } 
         }, 
         // returning state 
         logState: function(){
