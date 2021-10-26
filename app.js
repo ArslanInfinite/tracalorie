@@ -133,6 +133,10 @@ const UIController = (function(){
             document.querySelector(UISelectors.itemNameInput).value = '', 
             document.querySelector(UISelectors.itemCaloriesInput).value = ''
         },
+        addItemToForm: function(){
+            document.querySelector(UISelectors.itemNameInput).value = ItemController.getCurrentItem().name, 
+            document.querySelector(UISelectors.itemCaloriesInput).value = ItemController.getCurrentItem().calories
+        },
         hideList: function(){
             document.querySelector(UISelectors.itemList).style.display = 'none'
         },
@@ -199,6 +203,8 @@ const AppController = (function(ItemController, UIController){
             const itemToEdit = ItemController.getItemByID(ID)
             // setting the current item
             ItemController.setCurrentItem(itemToEdit)
+            // adding item to form
+            UIController.addItemToForm()
          }
         event.preventDefault()
     }
