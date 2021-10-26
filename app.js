@@ -97,6 +97,10 @@ const UIController = (function(){
             document.querySelector(UISelectors.itemList).insertAdjacentElement('beforeend', li)
         },
         // creating a public method to retrieve UISelectors to use with AppController's loadEventListeners function
+        clearInput: function(){
+            document.querySelector(UISelectors.itemNameInput).value = '', 
+            document.querySelector(UISelectors.itemCaloriesInput).value = ''
+        },
         getSelectors: function(){
             return UISelectors
         }
@@ -124,6 +128,8 @@ const AppController = (function(ItemController, UIController){
             const newItem = ItemController.addItem(input.name, input.calories)
             // adding new item to the UI
             UIController.addListItem(newItem)
+            // clearning input fields after adding new item
+            UIController.clearInput()
         }
         event.preventDefault()
     }
