@@ -173,20 +173,22 @@ const AppController = (function(ItemController, UIController){
     // ie edit state must be clear, calories are 0, etc
     return {
         initialize: function(){
-        // creating function to grab all the items from ItemController upon starting app
-        const items = ItemController.getItems()
-        // populate list with those grabbed items
-        if(items.length === 0){
-            UIController.hideList()
-        } else {
-            UIController.populateItemList(items)
-        }
-        const totalCalories = ItemController.getTotalCalories()
+            // clearing edit state / setting initial state
+            UIController.clearEditState()
+            // creating function to grab all the items from ItemController upon starting app
+            const items = ItemController.getItems()
+            // populate list with those grabbed items
+            if(items.length === 0){
+               UIController.hideList()
+            } else {
+               UIController.populateItemList(items)
+            }
+            const totalCalories = ItemController.getTotalCalories()
             // show total calories on UI
             UIController.showTotalCalories(totalCalories)
             
-        // loading all event listeners 
-        loadEventListeners()
+            // loading all event listeners 
+            loadEventListeners()
         }
     }
 
