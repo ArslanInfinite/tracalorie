@@ -58,6 +58,9 @@ const ItemController = (function(){
         setCurrentItem: function(item){
             state.currentItem = item
         }, 
+        getCurrentItem: function(){
+            return state.currentItem
+        },
         getTotalCalories: function(){
             // loop through all items and add all calories together
             let total = 0
