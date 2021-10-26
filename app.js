@@ -44,6 +44,17 @@ const ItemController = (function(){
             state.items.push(newItem)
             return newItem
         }, 
+        getTotalCalories: function(){
+            // loop through all items and add all calories together
+            let total = 0
+            state.items.forEach(function(item){
+                total += item.calories 
+            })
+            // setting total calories in state 
+            state.totalCalories = total
+            // returning total 
+            return state.totalCalories
+        },
         // returning state 
         logState: function(){
             return state
@@ -59,7 +70,8 @@ const UIController = (function(){
         itemList: '#item-list', 
         addButton: '.add-btn', 
         itemNameInput: '#item-name', 
-        itemCaloriesInput: '#item-calories'
+        itemCaloriesInput: '#item-calories', 
+        totalCalories: '.total-calories'
     }
     return {
         populateItemList: function(items){
@@ -107,6 +119,9 @@ const UIController = (function(){
         hideList: function(){
             document.querySelector(UISelectors.itemList).style.display = 'none'
         },
+        showTotalCalories: function(totalCalories){
+            document.querySelector(UISelectors.totalCalories).textContent = totalCalories
+        },
         getSelectors: function(){
             return UISelectors
         }
@@ -134,7 +149,11 @@ const AppController = (function(ItemController, UIController){
             const newItem = ItemController.addItem(input.name, input.calories)
             // adding new item to the UI
             UIController.addListItem(newItem)
-            // clearning input fields after adding new item
+            // get total calories
+            const totalCalories = ItemController.getTotalCalories()
+            // show total calories on UI
+            UIController.showTotalCalories(totalCalories)
+            // clearning input fields after adding new item 
             UIController.clearInput()
         }
         event.preventDefault()
