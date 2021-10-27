@@ -171,6 +171,11 @@ const UIController = (function(){
                 }
             })
         },
+        deleteListItem: function(id){
+            const itemID = `#item-${id}`
+            const item = document.querySelector(itemID)
+            item.remove()
+        },
         // creating a public method to retrieve UISelectors to use with AppController's loadEventListeners function
         clearInput: function(){
             document.querySelector(UISelectors.itemNameInput).value = '', 
@@ -292,6 +297,8 @@ const AppController = (function(ItemController, UIController){
         const currentItem = ItemController.getCurrentItem()
         // deleting the selected item from state
         ItemController.deleteItem(currentItem.id)
+        // deleting from UI
+        UIController.deleteListItem(currentItem.id)
         event.preventDefault()
     }
 
