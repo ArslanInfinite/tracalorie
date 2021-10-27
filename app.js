@@ -79,6 +79,9 @@ const ItemController = (function(){
             // removing selected item by its id
             state.items.splice(index, 1)
         },
+        clearAllItems: function(){
+            state.items = []
+        },
         setCurrentItem: function(item){
             state.currentItem = item
         }, 
@@ -114,6 +117,7 @@ const UIController = (function(){
         updateButton: '.update-btn', 
         deleteButton: '.delete-btn', 
         backButton: '.back-btn', 
+        clearButton: '.clear-btn',
         itemNameInput: '#item-name', 
         itemCaloriesInput: '#item-calories', 
         totalCalories: '.total-calories'
@@ -237,6 +241,8 @@ const AppController = (function(ItemController, UIController){
          document.querySelector(UISelectors.deleteButton).addEventListener('click', itemDeleteSubmit)
         // back button event to clear out edit mode in UI
         document.querySelector(UISelectors.backButton).addEventListener('click', UIController.clearEditState)
+        // clearing items event
+        document.querySelector(UISelectors.clearButton).addEventListener('click', clearAllItemsClick)
     }
 
     // adding items function
@@ -303,6 +309,12 @@ const AppController = (function(ItemController, UIController){
         UIController.showTotalCalories(totalCalories)
         UIController.clearEditState()
         event.preventDefault()
+    }
+
+    // clearing all items event
+    const clearAllItemsClick = function(){
+        // deleting all items from state structure
+        ItemController.clearAllItems()
     }
 
     // anything that needs to be run immediately will be in the initializer 
