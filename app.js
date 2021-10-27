@@ -218,6 +218,8 @@ const AppController = (function(ItemController, UIController){
         document.querySelector(UISelectors.itemList).addEventListener('click', itemEditClick)
         // updating item event
         document.querySelector(UISelectors.updateButton).addEventListener('click', itemUpdateSubmit)
+        // back button event to clear out edit mode in UI
+        document.querySelector(UISelectors.backButton).addEventListener('click', UIController.clearEditState)
     }
 
     // adding items function
