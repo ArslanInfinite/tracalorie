@@ -270,6 +270,7 @@ const AppController = (function(ItemController, UIController){
         UIController.updateListItem(updatingItem)
         const totalCalories = ItemController.getTotalCalories()
         UIController.showTotalCalories(totalCalories)
+        UIController.clearEditState()
         event.preventDefault()
     }
 
