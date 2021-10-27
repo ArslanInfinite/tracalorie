@@ -19,7 +19,7 @@ const ItemController = (function(){
             // {id: 2, name: 'Fried eggs', calories: 300}
         ], 
         currentItem: null, 
-        calories: 0
+        totalCalories: 0
     }
     // public return values
     return {
@@ -29,7 +29,7 @@ const ItemController = (function(){
         },
         addItem: function(name, calories){
             let ID
-            //creaing ID for each new item
+            //creating ID for each new item
             if(state.items.length > 0){
                 // automatically incrementing new IDs based on the length of the array of items
                 ID = state.items[state.items.length - 1].id + 1
@@ -62,7 +62,7 @@ const ItemController = (function(){
             let found = null
             state.items.forEach(function(item){
                 if(item.id === state.currentItem.id){
-                    item.name = name, 
+                    item.name = name
                     item.calories = calories
                     found = item
                 }
@@ -153,7 +153,7 @@ const UIController = (function(){
             listItems = Array.from(listItems)
             listItems.forEach(function(listItem){
                 const itemID = listItem.getAttribute('id')
-                if(item.id === `item-${item.id}`){
+                if(itemID === `item-${item.id}`){
                     document.querySelector(`#${itemID}`).innerHTML = `<strong>${item.name}: </strong> <em>${item.calories} calories</em>
                     <a href="#" class="secondary-content">
                         <i class="edit-item fa fa-pencil"></i>
@@ -185,7 +185,6 @@ const UIController = (function(){
             document.querySelector(UISelectors.addButton).style.display = 'inline'
         },
         showEditState: function(){
-            UIController.clearInput()
             document.querySelector(UISelectors.updateButton).style.display = 'inline'
             document.querySelector(UISelectors.deleteButton).style.display = 'inline'
             document.querySelector(UISelectors.backButton).style.display = 'inline'
@@ -266,8 +265,8 @@ const AppController = (function(ItemController, UIController){
         // getting item input
         const input = UIController.getItemInput()
         // updating the item
-        const updatingItem = ItemController.updateItem(input.name, input.calories)
-        UIController.updateListItem(updatingItem)
+        const updatedItem = ItemController.updateItem(input.name, input.calories)
+        UIController.updateListItem(updatedItem)
         const totalCalories = ItemController.getTotalCalories()
         UIController.showTotalCalories(totalCalories)
         UIController.clearEditState()
