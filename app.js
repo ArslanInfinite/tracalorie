@@ -99,6 +99,7 @@ const ItemController = (function(){
 const UIController = (function(){
     const UISelectors = {
         itemList: '#item-list', 
+        listItems: '#items-list li',
         addButton: '.add-btn', 
         updateButton: '.update-btn', 
         deleteButton: '.delete-btn', 
@@ -144,6 +145,21 @@ const UIController = (function(){
             </a>`
             // inserting item
             document.querySelector(UISelectors.itemList).insertAdjacentElement('beforeend', li)
+        },
+        updateListItem: function(item){
+            // retrieving list items from the DOM
+            let listItems = document.querySelectorAll(UISelectors.listItems)
+            // listItems gives a nodeList which must be converted into an array
+            listItems = Array.from(listItems)
+            listItems.forEach(function(listItem){
+                const itemID = listItem.getAttribute('id')
+                if(item.ID === `item-${item.ID}`){
+                    document.querySelector(`#${itemID}`).innerHTML = `<strong>${item.name}: </strong> <em>${item.calories} calories</em>
+                    <a href="#" class="secondary-content">
+                        <i class="edit-item fa fa-pencil"></i>
+                    </a>`
+                }
+            })
         },
         // creating a public method to retrieve UISelectors to use with AppController's loadEventListeners function
         clearInput: function(){
@@ -250,7 +266,8 @@ const AppController = (function(ItemController, UIController){
         // getting item input
         const input = UIController.getItemInput()
         // updating the item
-        const updatingItem = ItemController.updatingItem(input.name, input.calories)
+        const updatingItem = ItemController.updateItem(input.name, input.calories)
+        UIController.updateListItem(updatingItem)
         event.preventDefault()
     }
 
