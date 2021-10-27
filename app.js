@@ -69,6 +69,16 @@ const ItemController = (function(){
             })
             return found
         },
+        deleteItem: function(id){
+            // getting all IDs
+            ids = state.items.map(function(item){
+                return item.id
+            })
+            // getting the index 
+            const index = ids.indexOf(id)
+            // removing selected item by its id
+            state.items.splice(index, 1)
+        },
         setCurrentItem: function(item){
             state.currentItem = item
         }, 
@@ -218,6 +228,8 @@ const AppController = (function(ItemController, UIController){
         document.querySelector(UISelectors.itemList).addEventListener('click', itemEditClick)
         // updating item event
         document.querySelector(UISelectors.updateButton).addEventListener('click', itemUpdateSubmit)
+         // deleting item event
+         document.querySelector(UISelectors.deleteButton).addEventListener('click', itemDeleteSubmit)
         // back button event to clear out edit mode in UI
         document.querySelector(UISelectors.backButton).addEventListener('click', UIController.clearEditState)
     }
@@ -272,6 +284,14 @@ const AppController = (function(ItemController, UIController){
         const totalCalories = ItemController.getTotalCalories()
         UIController.showTotalCalories(totalCalories)
         UIController.clearEditState()
+        event.preventDefault()
+    }
+    // deleting the selected item
+    const itemDeleteSubmit = function(event){
+        // getting the current item
+        const currentItem = ItemController.getCurrentItem()
+        // deleting the selected item from state
+        ItemController.deleteItem(currentItem.id)
         event.preventDefault()
     }
 
