@@ -299,6 +299,9 @@ const AppController = (function(ItemController, UIController){
         ItemController.deleteItem(currentItem.id)
         // deleting from UI
         UIController.deleteListItem(currentItem.id)
+        const totalCalories = ItemController.getTotalCalories()
+        UIController.showTotalCalories(totalCalories)
+        UIController.clearEditState()
         event.preventDefault()
     }
 
