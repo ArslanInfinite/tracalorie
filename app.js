@@ -55,6 +55,20 @@ const ItemController = (function(){
             })
             return found
         },
+        updateItem: function(name, calories){
+            // converting calories to number
+            calories = parseInt(calories)
+
+            let found = null
+            state.items.forEach(function(item){
+                if(item.id === state.currentItem.id){
+                    item.name = name, 
+                    item.calories = calories
+                    found = item
+                }
+            })
+            return found
+        },
         setCurrentItem: function(item){
             state.currentItem = item
         }, 
@@ -233,7 +247,10 @@ const AppController = (function(ItemController, UIController){
 
     // updating the item itself 
     const itemUpdateSubmit = function(event){
-        console.log('update')
+        // getting item input
+        const input = UIController.getItemInput()
+        // updating the item
+        const updatingItem = ItemController.updatingItem(input.name, input.calories)
         event.preventDefault()
     }
 
