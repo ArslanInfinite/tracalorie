@@ -176,8 +176,19 @@ const AppController = (function(ItemController, UIController){
         const UISelectors = UIController.getSelectors()
         // adding a new item event
         document.querySelector(UISelectors.addButton).addEventListener('click', itemAddSubmit)
+        // disabling submit button on enter in order to prevent accidental entries while in edit mode
+        document.addEventListener('keypress', function(event){
+            // check for which key was hit based on the keycode property
+            if(event.keyCode === 13 || event.which === 13){
+                // disabling the enter button
+                event.preventDefault()
+                return false 
+            }
+        })
         // edit icon click event
         document.querySelector(UISelectors.itemList).addEventListener('click', itemEditClick)
+        // updating item event
+        document.querySelector(UISelectors.updateButton).addEventListener('click', itemUpdateSubmit)
     }
 
     // adding items function
@@ -220,6 +231,11 @@ const AppController = (function(ItemController, UIController){
         event.preventDefault()
     }
 
+    // updating the item itself 
+    const itemUpdateSubmit = function(event){
+        console.log('update')
+        event.preventDefault()
+    }
 
     // anything that needs to be run immediately will be in the initializer 
     // ie edit state must be clear, calories are 0, etc
