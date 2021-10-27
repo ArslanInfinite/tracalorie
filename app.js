@@ -153,7 +153,7 @@ const UIController = (function(){
             listItems = Array.from(listItems)
             listItems.forEach(function(listItem){
                 const itemID = listItem.getAttribute('id')
-                if(item.ID === `item-${item.ID}`){
+                if(item.id === `item-${item.id}`){
                     document.querySelector(`#${itemID}`).innerHTML = `<strong>${item.name}: </strong> <em>${item.calories} calories</em>
                     <a href="#" class="secondary-content">
                         <i class="edit-item fa fa-pencil"></i>
@@ -268,6 +268,8 @@ const AppController = (function(ItemController, UIController){
         // updating the item
         const updatingItem = ItemController.updateItem(input.name, input.calories)
         UIController.updateListItem(updatingItem)
+        const totalCalories = ItemController.getTotalCalories()
+        UIController.showTotalCalories(totalCalories)
         event.preventDefault()
     }
 
