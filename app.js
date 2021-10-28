@@ -1,5 +1,12 @@
 // Storage Controller
+const StorageController = (function(){
+    // public methods below
+    return {
+        storeItem: function(){
 
+        }
+    }
+})()
 
 
 // Item Controller - IIFE
@@ -226,7 +233,7 @@ const UIController = (function(){
 
 // App Controller (main controller) - IIFE
 // 
-const AppController = (function(ItemController, UIController){
+const AppController = (function(ItemController, StorageController, UIController){
     // loading eventlisteners 
     const loadEventListeners = function(){
         // getting UI selectors
@@ -355,6 +362,6 @@ const AppController = (function(ItemController, UIController){
         }
     }
 
-})(ItemController, UIController)
+})(ItemController, StorageController, UIController)
 
 AppController.initialize()
