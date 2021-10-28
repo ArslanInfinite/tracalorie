@@ -29,6 +29,15 @@ const StorageController = (function(){
                 items = JSON.parse(localStorage.getItem('items'))
             }
             return items 
+        }, 
+        updateItemStorage: function(updatedItem){
+            let items = JSON.parse(localStorage.getItems('items'))
+            items.forEach(function(item, index){
+                if(updatedItem.id === item.id){
+                    items.splice(index, 1, updatedItem)
+                }
+            })
+            localStorage.setItem('items', JSON.stringify(items))
         }
     }
 })()
@@ -338,6 +347,8 @@ const AppController = (function(ItemController, StorageController, UIController)
         UIController.updateListItem(updatedItem)
         const totalCalories = ItemController.getTotalCalories()
         UIController.showTotalCalories(totalCalories)
+        //updating local storage 
+        StorageController.updateItemStorage(updatedItem)
         UIController.clearEditState()
         event.preventDefault()
     }
