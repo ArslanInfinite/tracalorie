@@ -2,8 +2,24 @@
 const StorageController = (function(){
     // public methods below
     return {
-        storeItem: function(){
-
+        storeItem: function(item){
+            let items = []
+            // check if there are any items in local storage
+            // local storage can only store as strings, must convert to object to string using JSON stringify
+            if(localStorage.getItem('items') === null){
+                items = []
+                items.push(item)
+                // set local storage 
+                localStorage.setItem('items', JSON.stringify(items))
+            } else {
+                // turning the string back into an object requires JSON parse
+                // getting what is in local storage already
+                items = JSON.parse(localStorage.getItem('items'))
+                // pushing new item
+                items.push(item)
+                // setting local storage again
+                localStorage.setItem('items', JSON.stringify(items))
+            }
         }
     }
 })()
@@ -275,6 +291,8 @@ const AppController = (function(ItemController, StorageController, UIController)
             const totalCalories = ItemController.getTotalCalories()
             // show total calories on UI
             UIController.showTotalCalories(totalCalories)
+            // store in local storage
+            StorageController.storeItem(newItem)
             // clearning input fields after adding new item 
             UIController.clearInput()
         }
