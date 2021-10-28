@@ -47,6 +47,9 @@ const StorageController = (function(){
                 }
             })
             localStorage.setItem('items', JSON.stringify(items))
+        }, 
+        clearItemsFromStorage: function(){
+            localStorage.removeItem('items')
         }
     }
 })()
@@ -385,6 +388,8 @@ const AppController = (function(ItemController, StorageController, UIController)
         UIController.showTotalCalories(totalCalories)
         // removing deleted items from UI
         UIController.removeItems()
+        // clearing from local storage
+        StorageController.clearItemsFromStorage()
         // hiding UL line 
         UIController.hideList()
     }
