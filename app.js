@@ -44,12 +44,13 @@ const ItemController = (function(){
     }
     // creating data structure / initial state (mimic react state)
     const state = {
-        items: [
+        items: StorageController.getItemsFromStorage(),
+        // items: [
 
-            // {id: 0, name: 'Steak Dinner', calories: 1200}, 
-            // {id: 1, name: 'Ice cream sandwich', calories: 400}, 
-            // {id: 2, name: 'Fried eggs', calories: 300}
-        ], 
+        //     // {id: 0, name: 'Steak Dinner', calories: 1200}, 
+        //     // {id: 1, name: 'Ice cream sandwich', calories: 400}, 
+        //     // {id: 2, name: 'Fried eggs', calories: 300}
+        // ], 
         currentItem: null, 
         totalCalories: 0
     }
