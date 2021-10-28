@@ -23,7 +23,7 @@ const StorageController = (function(){
         }, 
         getItemsFromStorage: function(){
             let items
-            if(localStorage.getItem('items' === null)){
+            if(localStorage.getItem('items') === null){ 
                 items = []
             } else {
                 items = JSON.parse(localStorage.getItem('items'))
@@ -65,13 +65,13 @@ const ItemController = (function(){
     }
     // creating data structure / initial state (mimic react state)
     const state = {
-        items: StorageController.getItemsFromStorage(),
         // items: [
 
         //     // {id: 0, name: 'Steak Dinner', calories: 1200}, 
         //     // {id: 1, name: 'Ice cream sandwich', calories: 400}, 
         //     // {id: 2, name: 'Fried eggs', calories: 300}
         // ], 
+        items: StorageController.getItemsFromStorage(),
         currentItem: null, 
         totalCalories: 0
     }
@@ -125,7 +125,7 @@ const ItemController = (function(){
         },
         deleteItem: function(id){
             // getting all IDs
-            ids = state.items.map(function(item){
+            const ids = state.items.map(function(item){
                 return item.id
             })
             // getting the index 
@@ -166,7 +166,7 @@ const ItemController = (function(){
 const UIController = (function(){
     const UISelectors = {
         itemList: '#item-list', 
-        listItems: '#items-list li',
+        listItems: '#item-list li',
         addButton: '.add-btn', 
         updateButton: '.update-btn', 
         deleteButton: '.delete-btn', 
