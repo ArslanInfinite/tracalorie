@@ -190,6 +190,15 @@ const UIController = (function(){
             document.querySelector(UISelectors.itemCaloriesInput).value = ItemController.getCurrentItem().calories, 
             UIController.showEditState()
         },
+        removeItems: function(){
+            let listItems = document.querySelectorAll(UISelectors.listItems)
+            // turning nodeList into array
+            listItems = Array.from(listItems)
+            // removing items from array
+            listItems.forEach(function(item){
+                item.remove()
+            })
+        },
         hideList: function(){
             document.querySelector(UISelectors.itemList).style.display = 'none'
         },
@@ -315,6 +324,12 @@ const AppController = (function(ItemController, UIController){
     const clearAllItemsClick = function(){
         // deleting all items from state structure
         ItemController.clearAllItems()
+        const totalCalories = ItemController.getTotalCalories()
+        UIController.showTotalCalories(totalCalories)
+        // removing deleted items from UI
+        UIController.removeItems()
+        // hiding UL line 
+        UIController.hideList()
     }
 
     // anything that needs to be run immediately will be in the initializer 
