@@ -3,7 +3,7 @@ const StorageController = (function(){
     // public methods below
     return {
         storeItem: function(item){
-            let items = []
+            let items
             // check if there are any items in local storage
             // local storage can only store as strings, must convert to object to string using JSON stringify
             if(localStorage.getItem('items') === null){
@@ -20,6 +20,15 @@ const StorageController = (function(){
                 // setting local storage again
                 localStorage.setItem('items', JSON.stringify(items))
             }
+        }, 
+        getItemsFromStorage: function(){
+            let items
+            if(localStorage.getItem('items' === null)){
+                items = []
+            } else {
+                items = JSON.parse(localStorage.getItem('items'))
+            }
+            return items 
         }
     }
 })()
